@@ -37,10 +37,11 @@ export class OrderService {
     this.cartService.clear();
   }
 
-  checkOrder(order: OrderModel): Observable<OrderModel> {
+  checkOrder(order: OrderModel): Observable<string> {
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post(`${MEAT_API}/orders`, JSON.stringify(order),
       new RequestOptions({headers: headers}))
-      .map(res => res.json());
+      .map(res => res.json())
+      .map(order =>  order.id);
   }
 }
