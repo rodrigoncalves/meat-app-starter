@@ -5,12 +5,15 @@ import { OrderService } from './order.service';
 import { OrderModel } from './order.model';
 import { OrderItem } from './order-item.model';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
   templateUrl: './order.component.html'
 })
 export class OrderComponent implements OnInit {
+
+  orderForm: FormGroup;
 
   delivery: number = 8;
 
@@ -21,10 +24,22 @@ export class OrderComponent implements OnInit {
     { label: 'Cartão refeição', value: 'REF' },
   ];
 
-  constructor(private orderService: OrderService,
-    private router: Router) { }
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.orderForm = this.fb.group({
+      name: this.fb.control(''),
+      email: this.fb.control(''),
+      emailConfirmation: this.fb.control(''),
+      address: this.fb.control(''),
+      number: this.fb.control(''),
+      optionalAddress: this.fb.control(''),
+      paymentOption: this.fb.control(''),
+    });
   }
 
   itemsValue(): number {
