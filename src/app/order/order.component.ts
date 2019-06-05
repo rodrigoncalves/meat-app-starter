@@ -5,7 +5,7 @@ import { OrderService } from './order.service';
 import { OrderModel } from './order.model';
 import { OrderItem } from './order-item.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -40,7 +40,18 @@ export class OrderComponent implements OnInit {
       number: this.fb.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.fb.control(''),
       paymentOption: this.fb.control('', [Validators.required]),
-    });
+    }, { validator: OrderComponent.equalsTo });
+  }
+
+  static equalsTo(group: AbstractControl): { [key: string]: boolean } {
+    const email = group.get('email');
+    const emailConfirmation = group.get('emailConfirmation');
+
+    if (!email || !emailConfirmation || email.value == emailConfirmation.value) {
+      return undefined;
+    }
+
+    return { emailsNotMatch: true };
   }
 
   itemsValue(): number {
