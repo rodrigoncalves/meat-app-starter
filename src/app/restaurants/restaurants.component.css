@@ -1,0 +1,8 @@
+.search-link {
+  cursor: pointer;
+  color: #555;
+}
+
+.search-link:hover {
+  color: #dd4b39;
+}
