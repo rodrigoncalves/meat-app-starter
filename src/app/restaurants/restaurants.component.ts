@@ -4,9 +4,14 @@ import { RestaurantModel } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/from';
 
 @Component({
   selector: 'mt-restaurants',
@@ -48,7 +53,8 @@ export class RestaurantsComponent implements OnInit {
     this.searchControl.valueChanges
       .debounceTime(500) // esperar 500 ms entre 2 eventos para fazer requisição
       .distinctUntilChanged() // não repetir a mesma requisição
-      .switchMap(term => this.restaurantsService.restaurants(term))
+      .switchMap(term => this.restaurantsService.restaurants(term)
+        .catch(err => Observable.from([])))
       .subscribe(res => this.restaurants = res);
 
     this.restaurantsService.restaurants()
