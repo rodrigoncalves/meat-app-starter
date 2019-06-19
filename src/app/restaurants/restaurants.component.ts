@@ -5,6 +5,8 @@ import { RestaurantsService } from './restaurants.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'mt-restaurants',
@@ -44,6 +46,8 @@ export class RestaurantsComponent implements OnInit {
     })
 
     this.searchControl.valueChanges
+      .debounceTime(500) // esperar 500 ms entre 2 eventos para fazer requisição
+      .distinctUntilChanged() // não repetir a mesma requisição
       .switchMap(term => this.restaurantsService.restaurants(term))
       .subscribe(res => this.restaurants = res);
 
