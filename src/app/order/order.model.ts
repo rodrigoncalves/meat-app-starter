@@ -6,6 +6,7 @@ export class OrderModel {
     public number: number,
     public optionalAddress: string,
     public paymentOption: string,
-    public items: OrderItem[] = []
-  ) {}
+    public items: OrderItem[] = [],
+    public id?: string
+  ) { }
 }
