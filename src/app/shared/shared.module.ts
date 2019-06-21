@@ -7,6 +7,7 @@ import { CommonModule } from "@angular/common";
 import { OrderService } from "app/order/order.service";
 import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
 import { RestaurantsService } from "app/restaurants/restaurants.service";
+import { LoginService } from "app/security/login/login.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ export class SharedModule {
       providers: [
         OrderService,
         ShoppingCartService,
-        RestaurantsService
+        RestaurantsService,
+        LoginService
       ]
     }
   }

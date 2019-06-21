@@ -35,7 +35,6 @@ import { LoginComponent } from './security/login/login.component';
     OrderSummaryComponent,
     NotFoundComponent,
     LoginComponent,
-
   ],
   imports: [
     BrowserModule,
