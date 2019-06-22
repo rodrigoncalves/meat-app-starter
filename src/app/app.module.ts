@@ -22,6 +22,7 @@ import { LoginComponent } from './security/login/login.component';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -40,6 +41,7 @@ registerLocaleData(localePt, 'pt-BR');
     OrderSummaryComponent,
     NotFoundComponent,
     LoginComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
