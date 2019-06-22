@@ -1,3 +1,4 @@
-<div class="snackbar">
+<button (click)="snackVisibility = snackVisibility === 'hidden' ? snackVisibility = 'visible' : 'hidden'"></button>
+<div class="snackbar" [@snack-visibility]='snackVisibility'>
   {{ message }}
 </div>
