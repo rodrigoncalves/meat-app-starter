@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
     });
 
-    this.navigateTo = this.activatedRoute.snapshot.params['to'] || '/';
+    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
   }
 
   login() {
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe(
       (user: User) => this.notificationService.notify(`Bem vindo(a), ${user.name}!`),
       (res: HttpErrorResponse) => this.notificationService.notify(res.error.message),
-      () => this.router.navigate([this.navigateTo])
+      () => this.router.navigate([atob(this.navigateTo)])
     );
   }
 
